@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+header{
+   width: 100% ;
+ height: 10%; 
+}
+
+#logo {
+   width: 150px;
+   height: 150px;
+   padding: 20px;
+}
+
+h1 {
+   font-size: 150px;
+   display: inline-block;
+   color: #f6416c;
+   font-family: 'Permanent Marker', cursive;
+   margin-left: 300px;
+   
+
+}
+
+body {
+   width: auto;
+   height: 2000px;
+   background-color: #f8f3d4;
+}
+main {
+   height: 100%;
+}
+
+
+footer {
+   background-color: #ffde7d;
+   margin-bottom: 0%;
+   width: 100%;
+   height: 5%;
+   text-align: center;
+   font-size: x-large;
+}
+
+#footerP {
+    padding: 20px;
+}
+
+img {
+   width: 400px;
+   height: 300px;
+}
+
+
+#imagesDiv {
+   text-align: center;
+   padding: 30px;
+}
+
+.imagesDiv {
+   padding: 30px;
+}
+
+#showResults {
+   size: 50px;
+}
+
+.mainWelcome {
+   margin-left: 50px;
+   font-size:50px;
+   color: #f6416c;
+   margin-top: 30px;
+}
+
+.mainP {
+    font-size: 30px ;
+    margin-left: 50px;
+    margin-top: 20px;
+    color:#f6416c ;
+
+}
+
+#form {
+   border: 2px solid  black;
+   width: 350px;
+   height: 100px;
+   background-color: #ffde7d;
+   color: #7d5a5a;
+   margin-left: 100px;
+   margin-top: 40px;
+   font-size: x-large;
+   border-radius: 10px;
+  text-align: center;
+  
+}
