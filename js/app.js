@@ -5,13 +5,22 @@ var fisrtProductImage = document.getElementById('firstImage');
 var secondProductImage = document.getElementById('secondImage');
 var thirdProductImage = document.getElementById('thirdImage');
 
+var image_div = document.getElementById('imagesDiv');
+var showResults = document.getElementById('showResults') ; 
+
+
 var firstImageIndex;
 var secondImageIndex;
 var thirdImageIndex;
 
-
-var maxAttempts = 25;
+var maxAttempts = 5;
 var userAttempts = 0;
+
+var roundsNum ;  
+
+image_div.addEventListener('click', userClick);
+form.addEventListener ('submit' , submitter ); 
+showResults.addEventListener ('submit', showResult ) ; 
 
 function Products(name, imgFilePath) {
     this.name = name;
@@ -48,36 +57,33 @@ new Products('wine-glass', '../img/wine-glass.jpg');
 renderThreeRandomImages();
 
 
-var image_div = document.getElementById('imagesDiv');
-image_div.addEventListener('click', userClick);
-
 function userClick(event) {
-    userAttempts++;
-
-    if (userAttempts <= maxAttempts) {
+    
+    if (userAttempts < maxAttempts) {
 
         if (event.target.id === 'firstImage') {
             Products.prototype.allProducts[firstImageIndex].votes++;
+            userAttempts++;
            
         } else if (event.target.id === 'secondImage') {
             Products.prototype.allProducts[secondImageIndex].votes++;
+            userAttempts++;
         
         } else if (event.target.id === 'thirdImage') {
             Products.prototype.allProducts[thirdImageIndex].votes++;
+            userAttempts++;
         }
 
         renderThreeRandomImages();   
     }
-
-    
+       
+    // showResults = document.disabled = false ;   
 }
-
 
 
 function generateRandomIndex() {
     return Math.floor(Math.random() * (Products.prototype.allProducts.length));
 }
-
 
 function renderThreeRandomImages() {
     firstImageIndex = generateRandomIndex();
@@ -100,29 +106,24 @@ function renderThreeRandomImages() {
 
 
 // choosing round number 
-form.addEventListener ('submit' , submitter ); 
 
 function submitter (event) {
    event.preventDefault () ; 
-    roundsNum= event.target.userAttempts.value ; 
+   roundsNum= event.target.userAttempts.value ; 
    maxAttempts= roundsNum ; 
-
 }
 
-
-
 //  Showing Results 
-var showResults = document.getElementById('showResults') ; 
-showResults.addEventListener ('click', showResult ) ; 
 
-function showResult (event) {
+function showResult () {
 
     var resultList = document.getElementById ('resultsList') ; 
     var productsResult ; 
     for (var i=0; i <= Products.prototype.allProducts.length ; i++) {
    productsResult = document.createElement ('li') ; 
    productsResult.textContent = Products.prototype.allProducts[i].name + ' has ' + Products.prototype.allProducts[i].votes + 
-   ' votes, and was seen ' + Products.prototype.allProducts[i].shown  + ' times.';  
+   ' votes, and was seen ' + Products.prototype.allProducts[i].shown  + ' times. and the percentage is: ' + 
+    (Products.prototype.allProducts[i].votes * 100 / Products.prototype.allProducts[i].shown ) ; 
    resultList.appendChild (productsResult) ; 
  }
  image_div.removeEventListener('click', userClick);
