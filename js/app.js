@@ -5,22 +5,28 @@ var fisrtProductImage = document.getElementById('firstImage');
 var secondProductImage = document.getElementById('secondImage');
 var thirdProductImage = document.getElementById('thirdImage');
 
-var image_div = document.getElementById('imagesDiv');
-var showResults = document.getElementById('showResults') ; 
+var showResults = document.getElementById('resultsList');
+var showResultsButton = document.getElementById('showResults');
+var roundsNum = document.getElementById('form');
 
+var ctx = document.getElementById('myChart').getContext('2d');
 
 var firstImageIndex;
 var secondImageIndex;
 var thirdImageIndex;
 
-var maxAttempts = 5;
+var maxAttempts = 25;
 var userAttempts = 0;
 
-var roundsNum ;  
+var imagesNames = [];
+var chartVotes = [];
+var chartViews = [];
 
-image_div.addEventListener('click', userClick);
-form.addEventListener ('submit' , submitter ); 
-showResults.addEventListener ('submit', showResult ) ; 
+
+imagesDiv.addEventListener('click', userClick);
+showResultsButton.addEventListener('click', showResult);
+form.addEventListener('submit', submitter);
+
 
 function Products(name, imgFilePath) {
     this.name = name;
@@ -29,6 +35,7 @@ function Products(name, imgFilePath) {
     this.shown = 0;
 
     Products.prototype.allProducts.push(this);
+    imagesNames.push(name);
 }
 
 Products.prototype.allProducts = [];
@@ -58,26 +65,33 @@ renderThreeRandomImages();
 
 
 function userClick(event) {
-    
+
     if (userAttempts < maxAttempts) {
 
         if (event.target.id === 'firstImage') {
+            userAttempts++;
             Products.prototype.allProducts[firstImageIndex].votes++;
-            userAttempts++;
-           
+            renderThreeRandomImages();
+
         } else if (event.target.id === 'secondImage') {
+            userAttempts++;
             Products.prototype.allProducts[secondImageIndex].votes++;
-            userAttempts++;
-        
+            renderThreeRandomImages();
+
         } else if (event.target.id === 'thirdImage') {
-            Products.prototype.allProducts[thirdImageIndex].votes++;
             userAttempts++;
+            Products.prototype.allProducts[thirdImageIndex].votes++;
+            renderThreeRandomImages();
         }
 
-        renderThreeRandomImages();   
+
+    } else {
+
+        imagesDiv.removeEventListener('click', userClick);
+        showResultsButton.disabled = false;
     }
-       
-    // showResults = document.disabled = false ;   
+
+
 }
 
 
@@ -85,13 +99,32 @@ function generateRandomIndex() {
     return Math.floor(Math.random() * (Products.prototype.allProducts.length));
 }
 
+var pic1;
+var pic2;
+var pic3;
+
+
 function renderThreeRandomImages() {
+
+    pic1 = firstImageIndex;
+    pic2 = secondImageIndex;
+    pic3 = thirdImageIndex;
+
     firstImageIndex = generateRandomIndex();
 
     do {
         secondImageIndex = generateRandomIndex();
         thirdImageIndex = generateRandomIndex();
     } while (firstImageIndex === secondImageIndex || firstImageIndex === thirdImageIndex || secondImageIndex === thirdImageIndex)
+
+    do {
+        firstImageIndex = generateRandomIndex();
+        secondImageIndex = generateRandomIndex();
+        thirdImageIndex = generateRandomIndex();
+
+    } while (firstImageIndex === secondImageIndex || firstImageIndex === thirdImageIndex || secondImageIndex === thirdImageIndex ||
+    firstImageIndex === pic1 || firstImageIndex === pic2 || firstImageIndex === pic3 || secondImageIndex === pic1 || secondImageIndex === pic2 ||
+    secondImageIndex === pic3 || thirdImageIndex === pic1 || thirdImageIndex === pic2 || thirdImageIndex === pic3)
 
 
     fisrtProductImage.src = Products.prototype.allProducts[firstImageIndex].imgFilePath;
@@ -107,26 +140,62 @@ function renderThreeRandomImages() {
 
 // choosing round number 
 
-function submitter (event) {
-   event.preventDefault () ; 
-   roundsNum= event.target.userAttempts.value ; 
-   maxAttempts= roundsNum ; 
+function submitter(event) {
+    event.preventDefault();
+    maxAttempts = event.target.roundsNum.value;
 }
 
 //  Showing Results 
+function showResult() {
 
-function showResult () {
+    for (var i = 0; i < Products.prototype.allProducts.length; i++) {
+        chartVotes.push(Products.prototype.allProducts[i].votes);
+        chartViews.push(Products.prototype.allProducts[i].shown);
+    }
 
-    var resultList = document.getElementById ('resultsList') ; 
-    var productsResult ; 
-    for (var i=0; i <= Products.prototype.allProducts.length ; i++) {
-   productsResult = document.createElement ('li') ; 
-   productsResult.textContent = Products.prototype.allProducts[i].name + ' has ' + Products.prototype.allProducts[i].votes + 
-   ' votes, and was seen ' + Products.prototype.allProducts[i].shown  + ' times. and the percentage is: ' + 
-    (Products.prototype.allProducts[i].votes * 100 / Products.prototype.allProducts[i].shown ) ; 
-   resultList.appendChild (productsResult) ; 
- }
- image_div.removeEventListener('click', userClick);
+
+    var productsResult;
+    for (var i = 0; i < Products.prototype.allProducts.length; i++) {
+        productsResult = document.createElement('li');
+        productsResult.textContent = Products.prototype.allProducts[i].name + ' has ' + Products.prototype.allProducts[i].votes +
+            ' votes, and was seen ' + Products.prototype.allProducts[i].shown + ' times. and the percentage is: ' +
+            (Products.prototype.allProducts[i].votes * 100 / Products.prototype.allProducts[i].shown + '%');
+        showResults.appendChild(productsResult);
+    }
+
+    makeChart();
+}
+
+
+//  Chart 
+
+function makeChart() {
+
+    var chart = new Chart(ctx, {
+        type: 'bar',
+
+        data: {
+            labels: imagesNames,
+            datasets: [
+                {
+                    label: 'Votes',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: chartVotes,
+                },
+                {
+                    label: 'Shown',
+                    backgroundColor: 'rgb(248, 220, 129)',
+                    borderColor: 'rgb(248, 220, 129)',
+                    data: chartViews,
+                }
+
+            ]
+        },
+
+        options: {
+        }
+    });
 
 }
 

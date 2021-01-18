@@ -23,8 +23,9 @@ h1 {
 
 body {
    width: auto;
-   height: 1500px;
+   height: 2300px;
    background-color: #f8f3d4;
+
 }
 main {
    height: 100%;
@@ -42,21 +43,20 @@ footer {
 
 #footerP {
     padding: 20px;
+    color: #f6416c;
 }
-
-img {
-   width: 400px;
-   height: 300px;
-}
-
 
 #imagesDiv {
    text-align: center;
    padding: 30px;
+  
 }
 
 .imagesDiv {
-   padding: 30px;
+   width: 400px;
+   height: 300px;
+   border: 2px solid;
+   margin: 20px;
 }
 
 #showResults {
@@ -103,3 +103,4 @@ img {
      font-size: x-large;
      color:  #f6416c;
 }
+
