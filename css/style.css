@@ -104,3 +104,10 @@ footer {
      color:  #f6416c;
 }
 
+canvas{
+
+   width:1200px !important;
+   height:800px !important;
+   margin-left: 60px;
+ 
+ }

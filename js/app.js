@@ -1,5 +1,7 @@
 'use strict';
 
+Products.prototype.allProducts = [];
+
 var productsSection = document.getElementById('imagesDiv');
 var fisrtProductImage = document.getElementById('firstImage');
 var secondProductImage = document.getElementById('secondImage');
@@ -22,12 +24,6 @@ var imagesNames = [];
 var chartVotes = [];
 var chartViews = [];
 
-
-imagesDiv.addEventListener('click', userClick);
-showResultsButton.addEventListener('click', showResult);
-form.addEventListener('submit', submitter);
-
-
 function Products(name, imgFilePath) {
     this.name = name;
     this.imgFilePath = imgFilePath;
@@ -36,9 +32,8 @@ function Products(name, imgFilePath) {
 
     Products.prototype.allProducts.push(this);
     imagesNames.push(name);
-}
 
-Products.prototype.allProducts = [];
+}
 
 new Products('bag', '../img/bag.jpg');
 new Products('banana', '../img/banana.jpg');
@@ -60,6 +55,10 @@ new Products('unicorn', '../img/unicorn.jpg');
 new Products('usb', '../img/usb.gif');
 new Products('water-can', '../img/water-can.jpg');
 new Products('wine-glass', '../img/wine-glass.jpg');
+
+imagesDiv.addEventListener('click', userClick);
+showResultsButton.addEventListener('click', showResult);
+form.addEventListener('submit', submitter);
 
 renderThreeRandomImages();
 
@@ -83,17 +82,13 @@ function userClick(event) {
             Products.prototype.allProducts[thirdImageIndex].votes++;
             renderThreeRandomImages();
         }
-
-
+       
     } else {
-
+        localStorage.setItem ('productObjects' , JSON.stringify(Products.prototype.allProducts)) ; 
         imagesDiv.removeEventListener('click', userClick);
         showResultsButton.disabled = false;
     }
-
-
 }
-
 
 function generateRandomIndex() {
     return Math.floor(Math.random() * (Products.prototype.allProducts.length));
@@ -142,11 +137,12 @@ function renderThreeRandomImages() {
 
 function submitter(event) {
     event.preventDefault();
-    maxAttempts = event.target.roundsNum.value;
+    maxAttempts = event.target.roundsNum.value;    
 }
 
 //  Showing Results 
 function showResult() {
+    showResults.innerHTML='';
 
     for (var i = 0; i < Products.prototype.allProducts.length; i++) {
         chartVotes.push(Products.prototype.allProducts[i].votes);
@@ -199,3 +195,17 @@ function makeChart() {
 
 }
 
+
+
+
+
+if (localStorage.getItem('productObjects')) {
+         
+    Products.prototype.allProducts = JSON.parse (localStorage.getItem('productObjects')) ;
+ 
+    // for(var i=0 ; i < lsArray.length ; i++ ){
+
+    //     new Products (lsArray[i].name , lsArray[i].imgFilePath , lsArray[i].votes , lsArray[i].shown) ; 
+    // }
+    console.log(Products.prototype.allProducts)
+} 
