@@ -35,26 +35,26 @@ function Products(name, imgFilePath) {
 
 }
 
-new Products('bag', '../img/bag.jpg');
-new Products('banana', '../img/banana.jpg');
-new Products('bathroom', '../img/bathroom.jpg');
-new Products('boots', '../img/boots.jpg');
-new Products('breakfast', '../img/breakfast.jpg');
-new Products('bubblegum', '../img/bubblegum.jpg');
-new Products('chair', '../img/chair.jpg');
-new Products('cthulhu', '../img/cthulhu.jpg');
-new Products('dog-duck', '../img/dog-duck.jpg');
-new Products('dragon', '../img/dragon.jpg');
-new Products('pen', '../img/pen.jpg');
-new Products('pet-sweep', '../img/pet-sweep.jpg');
-new Products('scissors', '../img/scissors.jpg');
-new Products('shark', '../img/shark.jpg');
-new Products('sweep', '../img/sweep.png');
-new Products('tauntaun', '../img/tauntaun.jpg');
-new Products('unicorn', '../img/unicorn.jpg');
-new Products('usb', '../img/usb.gif');
-new Products('water-can', '../img/water-can.jpg');
-new Products('wine-glass', '../img/wine-glass.jpg');
+new Products('bag', 'img/bag.jpg');
+new Products('banana', 'img/banana.jpg');
+new Products('bathroom', 'img/bathroom.jpg');
+new Products('boots', 'img/boots.jpg');
+new Products('breakfast', 'img/breakfast.jpg');
+new Products('bubblegum', 'img/bubblegum.jpg');
+new Products('chair', 'img/chair.jpg');
+new Products('cthulhu', 'img/cthulhu.jpg');
+new Products('dog-duck', 'img/dog-duck.jpg');
+new Products('dragon', 'img/dragon.jpg');
+new Products('pen', 'img/pen.jpg');
+new Products('pet-sweep', 'img/pet-sweep.jpg');
+new Products('scissors', 'img/scissors.jpg');
+new Products('shark', 'img/shark.jpg');
+new Products('sweep', 'img/sweep.png');
+new Products('tauntaun', 'img/tauntaun.jpg');
+new Products('unicorn', 'img/unicorn.jpg');
+new Products('usb', 'img/usb.gif');
+new Products('water-can', 'img/water-can.jpg');
+new Products('wine-glass', 'img/wine-glass.jpg');
 
 imagesDiv.addEventListener('click', userClick);
 showResultsButton.addEventListener('click', showResult);
