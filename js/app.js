@@ -1,7 +1,9 @@
 'use strict';
 
+// An array for all of the objects 
 Products.prototype.allProducts = [];
 
+// getting elements by Id
 var productsSection = document.getElementById('imagesDiv');
 var fisrtProductImage = document.getElementById('firstImage');
 var secondProductImage = document.getElementById('secondImage');
@@ -13,6 +15,7 @@ var roundsNum = document.getElementById('form');
 
 var ctx = document.getElementById('myChart').getContext('2d');
 
+// Declaring and assigning variables: 
 var firstImageIndex;
 var secondImageIndex;
 var thirdImageIndex;
@@ -24,6 +27,7 @@ var imagesNames = [];
 var chartVotes = [];
 var chartViews = [];
 
+// The constructor 
 function Products(name, imgFilePath) {
     this.name = name;
     this.imgFilePath = imgFilePath;
@@ -35,6 +39,7 @@ function Products(name, imgFilePath) {
 
 }
 
+//  Making new objects 
 new Products('bag', 'img/bag.jpg');
 new Products('banana', 'img/banana.jpg');
 new Products('bathroom', 'img/bathroom.jpg');
@@ -56,12 +61,15 @@ new Products('usb', 'img/usb.gif');
 new Products('water-can', 'img/water-can.jpg');
 new Products('wine-glass', 'img/wine-glass.jpg');
 
+// Adding event listener 
 imagesDiv.addEventListener('click', userClick);
 showResultsButton.addEventListener('click', showResult);
 form.addEventListener('submit', submitter);
 
 renderThreeRandomImages();
 
+
+// Declaring finctions : 
 
 function userClick(event) {
 
@@ -197,15 +205,10 @@ function makeChart() {
 
 
 
-
+//  Making sure if there is anything in the local storage, then get it and parse it
 
 if (localStorage.getItem('productObjects')) {
          
     Products.prototype.allProducts = JSON.parse (localStorage.getItem('productObjects')) ;
  
-    // for(var i=0 ; i < lsArray.length ; i++ ){
-
-    //     new Products (lsArray[i].name , lsArray[i].imgFilePath , lsArray[i].votes , lsArray[i].shown) ; 
-    // }
-    console.log(Products.prototype.allProducts)
 } 
