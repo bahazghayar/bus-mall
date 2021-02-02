@@ -174,13 +174,14 @@ function showResult() {
 //  Chart 
 
 function makeChart() {
-
-    var chart = new Chart(ctx, {
+    var chart = new Chart(ctx, 
+    {
         type: 'bar',
-
-        data: {
+        data: 
+        {
             labels: imagesNames,
-            datasets: [
+            datasets: 
+            [
                 {
                     label: 'Votes',
                     backgroundColor: 'rgb(255, 99, 132)',
@@ -196,12 +197,14 @@ function makeChart() {
 
             ]
         },
+        options: 
+        {
 
-        options: {
         }
     });
 
 }
+
 
 
 
